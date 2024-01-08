@@ -2,7 +2,7 @@
 
     <div fxLayout="row" fxLayoutAlign="space-around">
         <div>
-            <h3>Points: {{ score }}</h3>
+            <h3>JUGADOR: {{this.nom}}, Points: {{ score }}</h3>
         </div>
 
         <div>
@@ -14,9 +14,9 @@
         <div>
             <h2>Who is that Pokemon?...</h2>
         </div>
-    
+
         <div>
-            <app-pokemon-view [url]="urlImage"
+            <app-pokemon-view id="img" (mousedown)="rotar()" [url]="urlImage"
                               [show]="selected"
                               [width]="275"
                               [height]="200">
@@ -38,14 +38,14 @@
                 </li>
             </ul>
         </div>
-    
+
         <!-- <div>
             <h3>Points: {{ points }}</h3>
         </div>
         <div>
             <img *ngFor="let heart of hearts" class="heart" src="assets/heart.png">
         </div> -->
-    
+
         <div *ngIf="selected">
             <button mat-raised-button
                     color="primary"
@@ -54,7 +54,7 @@
             </button>
         </div>
     </div>
-    
+
 </ng-container>
 
 <ng-template #Loading>

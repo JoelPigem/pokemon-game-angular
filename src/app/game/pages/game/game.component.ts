@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Renderer2} from '@angular/core';
 import { getRandomItem } from 'src/app/helpers/random.helper';
 import { Pokemon } from '../../interfaces/pokemon.interface';
 import { PlayerService } from '../../services/player.service';
 import { PokemonService } from '../../services/pokemon.service';
+import {JugarService} from "../../../jugar.service";
 
 @Component({
   selector: 'app-game',
@@ -17,10 +18,11 @@ export class GameComponent implements OnInit {
   private _pokemons: Pokemon[] = [];
   private _pokemon!: Pokemon;
 
+  nom: string=""
   get score(): number {
     return this.playerService.score;
   }
-  
+
   get hearts(): Array<any> {
     return Array(this.playerService.lifes);
   }
@@ -48,12 +50,28 @@ export class GameComponent implements OnInit {
 
   constructor(
     private playerService: PlayerService,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private jugarservice: JugarService,
+    private renderer: Renderer2
   ) { }
 
   ngOnInit(): void {
     this.playerService.resetGame();
     this.newGame();
+    this.nomiPunts()
+  }
+  nomiPunts(){
+    // @ts-ignore
+    this.nom=this.jugarservice.tornarNom()
+  }
+  rotar(){
+    let rotar=90
+    let img= document.getElementById("img") as HTMLImageElement
+    this.renderer.setStyle(
+      img,
+    'transform',
+      `rotate(${(rotar)}deg)`
+    )
   }
 
   onSelect(pokemonName: string) {
@@ -68,7 +86,7 @@ export class GameComponent implements OnInit {
       this.playerService.decreaseLifes();
       console.log('incorrect');
     }
-    
+
   }
 
   // this function es execute every time that user click in next game

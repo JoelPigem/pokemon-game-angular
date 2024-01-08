@@ -1,0 +1,6 @@
+<div>
+  <label class="form-label" for="jugador">JUGADOR:</label>
+  <input class="input-text" type="text" [(ngModel)]="nom" name="Jugador" id="jugador" />
+  <button class="breath" mat-raised-button
+          color="primary" (click)="guardarNom(nom)" (click)="navigateTo('./home')">JUGAR</button>
+</div>
