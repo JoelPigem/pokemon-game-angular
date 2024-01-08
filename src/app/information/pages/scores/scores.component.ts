@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PuntuacioService} from "../../../puntuacio.service";
 
 @Component({
   selector: 'app-scores',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./scores.component.css']
 })
 export class ScoresComponent implements OnInit {
-
-  constructor() { }
+  usuaris: any[] = [];
+  constructor(private puntacioservice: PuntuacioService) { }
 
   ngOnInit(): void {
+    this.combinarArrays()
   }
-
+  combinarArrays(){
+    this.usuaris=this.puntacioservice.usuaris
+  }
 }
